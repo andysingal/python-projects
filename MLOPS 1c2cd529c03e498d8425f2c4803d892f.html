@@ -1,0 +1,701 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MLOPS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1c2cd529-c03e-498d-8425-f2c4803d892f" class="page sans"><header><h1 class="page-title">MLOPS</h1><p class="page-description"></p></header><div class="page-body"><ul id="2f80bd4d-7cf7-4a8d-a4c2-63b2c831033d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/andysingal/mlops_wandb">https://github.com/andysingal/mlops_wandb</a> </li></ul><ul id="c087a6b6-be57-46b0-8a84-a82d952776e6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://pyimagesearch.mykajabi.com/products/mlops-with-weights-biases/categories/2153474732/posts/2170069882">https://pyimagesearch.mykajabi.com/products/mlops-with-weights-biases/categories/2153474732/posts/2170069882</a> </li></ul><ul id="fae8bdad-b7fc-46f8-8412-98b55cba051d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/ttzt/catalog_of_requirements_for_ai_products">https://github.com/ttzt/catalog_of_requirements_for_ai_products</a> </li></ul><ul id="3207e67b-41a0-47be-94bf-1aa54c07c06d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ploomber-sql.readthedocs.io/en/latest/mini-projects/recommendation-system/eda-with-jupyter.html">https://ploomber-sql.readthedocs.io/en/latest/mini-projects/recommendation-system/eda-with-jupyter.html</a></li></ul><ul id="7bf30c39-28ca-4bb1-8439-77fcef4f480e" class="bulleted-list"><li style="list-style-type:disc"><figure id="3c7a0b26-ab41-4e9e-aac3-5aba1f566234" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_1.23.48_PM.png"><img style="width:1232px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_1.23.48_PM.png"/></a></figure></li></ul><p id="e0563d52-241b-4da9-9996-904da2168060" class="">
+</p><figure id="0b2ebada-7d98-4648-adee-dea6d2acb88a" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.14.06_PM.png"><img style="width:1710px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.14.06_PM.png"/></a></figure><p id="924fefd2-f2d9-4ead-8069-17dfe612e548" class="">
+</p><p id="ea8c4795-5c9e-4838-9e81-844431d86816" class="">
+</p><figure id="4c95df52-aad1-4a6d-a146-b9673b246d50" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.17.36_PM.png"><img style="width:1568px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.17.36_PM.png"/></a></figure><p id="848ea6a1-43e8-4c68-a54b-6bea83d265ca" class="">
+</p><p id="66fc66fe-8db2-4528-8e6c-739388697f4d" class="">
+</p><figure id="037bdc79-3f86-4de8-a5b3-8f2ef0ae2713" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.22.40_PM.png"><img style="width:1516px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.22.40_PM.png"/></a></figure><figure id="38231c03-1348-44ce-bfb7-7651d1b22906" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.26.33_PM.png"><img style="width:1516px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.26.33_PM.png"/></a></figure><figure id="942efd6b-3c27-4d96-949f-fa8bd0a03947" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.28.50_PM.png"><img style="width:1522px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.28.50_PM.png"/></a></figure><figure id="39ea7cfd-c269-4ba7-b04a-f447bc81251e" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.29.43_PM.png"><img style="width:1542px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.29.43_PM.png"/></a></figure><figure id="e4bd22bd-757d-40db-b949-ae3a6af3da72" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.30.31_PM.png"><img style="width:1460px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_3.30.31_PM.png"/></a></figure><figure id="2cc6e522-32bb-4ff3-bf99-13396619a54b" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.30.40_PM.png"><img style="width:1784px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.30.40_PM.png"/></a></figure><h3 id="08515e4f-809c-4733-b899-a4aed22bc317" class=""><strong>Data</strong></h3><p id="a621d0e2-e20d-4457-b527-b7ff4f1fd36c" class="">Describe the training and production (batches/streams) sources of data.</p><figure id="fad30f2b-c4bf-417e-92b6-e040cffbc5cc" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.32.59_PM.png"><img style="width:1710px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.32.59_PM.png"/></a></figure><figure id="823a05ce-c45d-49e1-99d7-2ce17b002f01" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.34.26_PM.png"><img style="width:1630px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.34.26_PM.png"/></a></figure><h3 id="93c8c94f-a2b8-4d1c-8cb2-fcdc31304c2f" class=""><strong>Labeling</strong></h3><p id="9e5c6d9b-b506-43f3-b115-14d0f257642f" class="">Describe the labeling process (ingestions, QA, etc.) and how we decided on the features and labels.</p><figure id="3e52dba5-ca68-435c-9b5b-82bd1c5e3753" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.43.49_PM.png"><img style="width:1714px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.43.49_PM.png"/></a></figure><p id="4d32a279-dc65-4324-b315-cff32ebfa9ec" class="">
+</p><h3 id="75c05d83-e4c5-4e65-9438-4d6ff8bffab8" class=""><strong>Metrics</strong></h3><p id="8fbf0ce4-0e13-46ce-8029-bcd2f04d8b5b" class="">One of the hardest challenges with ML systems is tying our core <a href="https://madewithml.com/courses/mlops/product-design/#objectives">objectives</a>, many of which may be qualitative, with quantitative metrics that our model can optimize towards.</p><figure id="9529c4e0-4048-4016-a848-13f3ff83a3b1" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-19_at_9.17.43_PM.png"><img style="width:1632px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-19_at_9.17.43_PM.png"/></a></figure><p id="db9bfcca-28e8-4065-aeae-23769863b0ab" class="">
+</p><p id="68d8c2b3-fa00-4b94-9bc8-0a7903aaacf7" class="">
+</p><p id="18dc6e25-b543-4a98-808d-dbf07d010ca3" class="">
+</p><p id="540d316b-2926-48ac-8218-bac425e09900" class="">
+</p><p id="e887a410-b22c-48dd-a6b1-e627028fa60d" class="">
+</p><p id="1e17ac99-10ce-42e8-b679-1e804f4f8a1e" class="">
+</p><p id="4cd52375-8f7f-46ba-9578-762b0cc5460c" class="">
+</p><p id="8e0148f9-bdf4-4cc1-85ad-08baaa5a1275" class="">
+</p><p id="258f84df-96be-4c81-8ea4-fba859e6284f" class="">
+</p><p id="d1bceaac-0f48-4fa7-8fe2-c0992af1b93a" class="">
+</p><p id="2903430d-f4db-4679-8ead-3fee0499d2e8" class="">Resources:</p><ul id="b9f49396-3d6d-43b1-bfdc-494fba7580f9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.refuel.ai/blog-posts/llm-labeling-technical-report">https://www.refuel.ai/blog-posts/llm-labeling-technical-report</a></li></ul><ul id="a0ae11a0-b01a-41b8-a2b4-50132efac868" class="bulleted-list"><li style="list-style-type:disc"><a href="https://medium.com/geekculture/how-to-label-text-data-using-llms-f0ffc3fcd168">https://medium.com/geekculture/how-to-label-text-data-using-llms-f0ffc3fcd168</a></li></ul><ul id="f86e89e7-5543-4681-bf9c-ccaaf4806817" class="bulleted-list"><li style="list-style-type:disc"><a href="https://aws.amazon.com/sagemaker/data-labeling/">https://aws.amazon.com/sagemaker/data-labeling/</a> </li></ul><ul id="63e351fe-3f8c-4e6c-9f41-5b07a77dc938" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.linkedin.com/pulse/labelling-options-llms-glenn-stewart/">https://www.linkedin.com/pulse/labelling-options-llms-glenn-stewart/</a></li></ul><ul id="3ac76dc3-58d3-4b45-8c5d-e39ec8df301b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://blog.truefoundry.com/llmops-mastering-the-art-of-managing-large-language-models-challenges-best-practices-and-future-trends/">https://blog.truefoundry.com/llmops-mastering-the-art-of-managing-large-language-models-challenges-best-practices-and-future-trends/</a></li></ul><p id="84ba418f-5aa2-4b6d-9e51-7d0de193c16e" class="">
+</p><figure id="0d3181ce-5992-4d5e-a853-5d2b87d27208" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.49.02_PM.png"><img style="width:2488px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.49.02_PM.png"/></a><figcaption>Source: <a href="https://www.cogitotech.com/generative-ai/">https://www.cogitotech.com/generative-ai/</a> </figcaption></figure><p id="d33e3212-f4e6-4428-bf5d-bfdfd69b5f50" class="">
+</p><p id="0b684bdb-3b76-44be-9041-02f8f160e515" class="">
+</p><p id="43698195-8d35-49b1-ad51-72cf8d1fe7f7" class="">FINETUNING:</p><p id="68079c2b-03ef-412f-a11c-708c7670a1eb" class="">
+</p><figure id="857e38d2-4b4d-4434-a1dd-a2a58d51dae2" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.54.40_PM.png"><img style="width:1574px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-12_at_6.54.40_PM.png"/></a></figure><p id="14994fc1-824a-477e-a52e-d3ef893fe175" class="">Source: <a href="https://www.labellerr.com/blog/comprehensive-guide-for-fine-tuning-of-llms/">https://www.labellerr.com/blog/comprehensive-guide-for-fine-tuning-of-llms/</a> </p><ul id="d326e559-ffa5-44ff-a185-ae7e8a5be3b0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://volumes.blog/2023/09/01/bringing-ai-to-your-data-the-power-of-domain-specific-language-models/">https://volumes.blog/2023/09/01/bringing-ai-to-your-data-the-power-of-domain-specific-language-models/</a> </li></ul><ul id="7ef42c3f-a2f0-4f8c-b5b9-a379f9cf24b1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.udemy.com/course/practical-mlops-for-data-scientists-devops-engineers-aws/">https://www.udemy.com/course/practical-mlops-for-data-scientists-devops-engineers-aws/</a></li></ul><ul id="273157fe-f176-4187-8536-7d742439423a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://levelup.gitconnected.com/the-ultimate-collection-of-mlops-github-repositories-836a72c8b7d3">https://levelup.gitconnected.com/the-ultimate-collection-of-mlops-github-repositories-836a72c8b7d3</a> </li></ul><p id="e96cbec7-4a84-47c7-82c0-236157e3253a" class="">
+</p><p id="571c1b06-873d-4284-8098-5ae83f7f115a" class="">AI USE CASES: </p><p id="3e025f5e-0ff0-42f0-8c03-3f58d39c5dd5" class="">
+</p><figure id="0cbc5d80-75aa-46ef-914a-dc84629c2b5c" class="image"><a href="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-19_at_9.45.50_PM.png"><img style="width:1324px" src="MLOPS%201c2cd529c03e498d8425f2c4803d892f/Screenshot_2023-09-19_at_9.45.50_PM.png"/></a></figure><p id="805a9179-9364-4b98-9ac6-5387377e0d52" class="">
+</p><p id="d40af403-fd40-411a-bce8-ea5eb073a15d" class="">
+</p><p id="3f246e67-f371-4614-a724-f4e55802ddf7" class="">
+</p><p id="c37b4a2a-5c81-4193-a89a-b83234508509" class="">Books:</p><ul id="4a712bf3-b46b-4c79-9774-0df30aee16e2" class="bulleted-list"><li style="list-style-type:disc"><strong>Implementing MLOps in the Enterprise</strong></li></ul><ul id="60e39ea9-84a7-4284-8377-4f067a248d86" class="bulleted-list"><li style="list-style-type:disc"></li></ul><figure id="46c4f223-4077-4e52-87f1-168d035e94f7"><a href="https://www.marketsandmarkets.com/top-100-artificial-intelligence-use-cases.asp" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Top use cases in Artificial Intelligence</div><div class="bookmark-description">Know who are the top players in AI and how they are being compared over 100s of key criteria. Know the revenue potential and deepest dive insight on top Artificial Intelligence use cases. Download comprehensive report on AI use cases now.</div></div><div class="bookmark-href"><img src="https://www.marketsandmarkets.com/favicon.ico" class="icon bookmark-icon"/>https://www.marketsandmarkets.com/top-100-artificial-intelligence-use-cases.asp</div></div></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
