@@ -11,3 +11,9 @@ Therefore, this gives us a very interesting idea: can we design a scalable exper
 This is where the large language models (LLM), such as GPT-4, can play a role. Among their vast amount of training data, a certain portion of the corpus contains texts that are dedicated to explaining and discussing the best practices of machine learning (ML). Thanks to that, the LLMs are able to internalize a substantial amount of ML expertise and obtain a significant chunk of the collective ML wisdom. This positions LLMs as potential knowledgable ML experts who can interact with the existing AutoML tool to collaboratively perform expert-guided hyperparameter tuning.
 
 <img width="482" alt="Screenshot 2023-11-02 at 1 47 18 PM" src="https://github.com/andysingal/python-projects/assets/20493493/4a649cc9-cdae-43f6-b825-52fbfa8a6971">
+
+
+
+
+Resources:
+- https://mlops.community/blog/
