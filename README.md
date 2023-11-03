@@ -18,3 +18,4 @@ This is where the large language models (LLM), such as GPT-4, can play a role. A
 Resources:
 - https://mlops.community/blog/
 - https://geekflare.com/best-mlops-platforms/
+- https://github.com/fugue-project/tune/blob/master/tune_notebook/monitors.py 
