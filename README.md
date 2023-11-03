@@ -21,4 +21,4 @@ Resources:
 - https://github.com/fugue-project/tune/blob/master/tune_notebook/monitors.py
 - https://github.com/DataTalksClub/mlops-zoomcamp
 - https://www.datacamp.com/blog/top-mlops-tools
-- 
+- <strong>https://blog.csdn.net/m0_57236802/article/details/133696149</strong>
