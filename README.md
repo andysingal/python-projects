@@ -102,7 +102,45 @@ Some MLOps frameworks provide auto-logging for ML/DL workloads where you can imp
 ## Distributed Training and Hyperparameter Optimization 
 To get to the best model results, try out various algorithms or parameter combinations and choose the best one based on a target metric like best accuracy. This work can be automated using multiple hyperparameter optimization and AutoML frameworks, which try out the different combinations, record all the metrics for each run and mark the best.
 
+There are several hyperparameter execution strategies:
 
+1. Grid search: Running all the parameter combinations
+
+2. Random: Running a sampled set from all the parameter combinations
+
+3. Bayesian optimization: Buiding a probability model of the objective function and using it to select the most promising hyperparameters to evaluate in the true objective function
+
+4. List: Running the first parameter from each list followed by the second from each list and so on
+
+## Building and Testing Models for Production
+When models are used in real-world applications, it is critical to ensure they are robust and well-tested. Therefore, in addition to traditional software testing (unit tests, static tests, and so on), testing should cover the following categories:
+
+1. Data quality tests: The dataset used for training is of high quality and does not carry bias.
+
+2. Model performance tests: The model produces accurate results.
+
+3. Serving application tests: The deployed model along with the data pre- or post-processing steps are robust and provide adequate performance.
+
+4. Pipeline tests: Ensuring the automated development pipeline handles various exceptions and the desired scale.
+
+
+Once you train the model, the next step is to make sure it is accurate and resilient. Beyond the common practice of setting aside a test dataset and measuring the model accuracy using that dataset, several additional tests can improve the model quality:
+
+1. Verify the performance is maintained across essential slices of the data (for example, devices by model, users by country or other categories, movies by genre) and that it does not drop significantly for a specific group.
+
+2. Compare the model results with previous versions or a baseline version and verify the performance does not degrade.
+
+3. Test different parameter combinations (hyperparameter search) to verify we chose the best parameter combination.
+
+4. Test for bias and fairness by verifying that the performance is maintained per gender and specific populations.
+
+5. Check feature importances and whether there are features with a marginal contribution that can be removed from the model.
+
+6. Test for immunity to fake, random, or malicious input vectors to increase robustness and defend against adversarial attacks.
+
+In many cases, the trained model can be further optimized for production and higher performance, for example, by performing feature selection and removing redundant features or by compressing the models and storing them in more machine-efficient formats like ONNX. Therefore, ML pipelines may incorporate model optimization steps.
+
+<img width="683" alt="Screenshot 2023-11-03 at 9 25 34 PM" src="https://github.com/andysingal/python-projects/assets/20493493/72446f88-5b00-459b-ab00-e9f786735726">
 
 Resources:
 - https://mlops.community/blog/
