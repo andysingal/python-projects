@@ -1,17 +1,106 @@
 # python-projects
 
-Content from https://towardsdatascience.com/when-automl-meets-large-language-model-756e6bb9baa7
 
-While approaching the hyperparameter tuning problems from a pure algorithmic point of view can work, there is another crucial piece of information that could complement the algorithmic search strategy: human expertise.
+# Writing and Maintaining Production ML Code
+Many data scientists like the usability and interactivity of Jupyter Notebooks when they develop and evaluate models. It is convenient indeed to manipulate some code and immediately see a visual table or a chart, and most ML tutorials, examples, and Kagle projects are consumed as Notebooks.
 
-Senior data scientists, based on their years of experience and deep understanding of the ML algorithms, often intuitively know where to initiate the search, which regions of the search space might be more promising, or when to narrow down or expand the possibilities.
+You can find projects where the data preparation, training, evaluation, and even prediction are all made in one huge Notebook, but this approach can lead to challenges when moving to production, for example:
 
-Therefore, this gives us a very interesting idea: can we design a scalable expertise-guided search strategy that leverages both the nuanced insights provided by the expert and the search efficiency offered by the AutoML algorithms?
+1. Very hard to track the code changes across versions (in Git).
 
-This is where the large language models (LLM), such as GPT-4, can play a role. Among their vast amount of training data, a certain portion of the corpus contains texts that are dedicated to explaining and discussing the best practices of machine learning (ML). Thanks to that, the LLMs are able to internalize a substantial amount of ML expertise and obtain a significant chunk of the collective ML wisdom. This positions LLMs as potential knowledgable ML experts who can interact with the existing AutoML tool to collaboratively perform expert-guided hyperparameter tuning.
+2. Almost impossible to implement test harnesses and unit testing.
 
-<img width="482" alt="Screenshot 2023-11-02 at 1 47 18 PM" src="https://github.com/andysingal/python-projects/assets/20493493/4a649cc9-cdae-43f6-b825-52fbfa8a6971">
+3. Functions cannot be reused in various projects.
 
+4. Moving to production requires code refactoring and removal of visualization or scratch code.
+
+5. Lack of proper documentation.
+
+The best approach is to use functional programming for code segments and Notebooks for interactive and visualization parts. Example 2-1 implements a data preparation function that accepts a dataset (DataFrame) and some properties as inputs and returns the manipulated dataset. The function is documented and allows users to understand the purpose and usage.
+```
+import pandas as pd
+
+def add_date_features(
+    data, time_column: str = "timestamp", drop_timestamp: bool = False
+):
+    """Add numeric date features (day of week, hour, month) to a dataframe
+
+    :param time_column:    The name of the timestamps column in the data
+    :param drop_timestamp: set to True to drop the timestamp column from
+                           the original dataframe
+    :return datafarame
+    """
+    timestamp = pd.to_datetime(data[time_column])
+    data["day_of_week"] = timestamp.dt.day_of_week
+    data["hour"] = timestamp.dt.hour
+    data["month"] = timestamp.dt.month
+    if drop_timestamp:
+        data.drop([time_column], axis=1, inplace=True)
+    return data
+```
+Place the function in a separate Python file data_prep.py, and you can call it from the Notebook, inject data, and examine or visualize its output using the following code cell:
+
+```
+import pandas as pd
+from data_prep import add_date_features
+
+df = pd.read_csv("data.csv")
+df = add_date_features(df, "timestamp", drop_timestamp=True)
+df.head()
+```
+ Data prep test function (test_data_prep.py)
+ ```
+import pytest
+import data_prep
+import pandas as pd
+
+# tell pytest to test both drop values (True/False)
+@pytest.mark.parametrize("drop_timestamp", [True, False])
+def test_add_date_features(drop_timestamp):
+    df = pd.DataFrame({'times':['2022-01-01 08:00',
+                                '2022-02-02 09:00',
+                                '2022-03-03 10:00'],
+                       'vals':[1,2,3]})
+    new_df = data_prep.add_date_features(df, "times", drop_timestamp=drop_timestamp)
+
+    # verify the results are as expected
+    assert new_df["day_of_week"].to_list() == [5, 2, 3]
+    assert new_df["month"].to_list() == [1, 2, 3]
+    assert new_df["hour"].to_list() == [8, 9, 10]
+    assert ("times" in new_df.columns.values) != drop_timestamp
+```
+
+Using this approach, you gain some immediate benefits:
+
+- Easily see changes to your data prep code in the version control.
+
+- The same code can be tested later with a test harness (for example, using pytest).
+
+- The function can be moved to production without the need to refactor the notebook.
+
+- The function is documented, and you can easily understand how to use it and what to expect.
+
+- The function can later be saved to a shared library and used across different projects.
+
+The code becomes more readable.
+
+## Tracking and Comparing Experiment Results
+When running ML experiments, it is essential to track every run so that you can reproduce experiment results (for example, which parameters and inputs yield the best results), visualize the various metrics, and compare the results of different algorithms or parameters sets.
+
+<img width="739" alt="Screenshot 2023-11-03 at 9 15 45 PM" src="https://github.com/andysingal/python-projects/assets/20493493/a5d16588-f273-4679-8c31-abe6b4745395">
+
+In the real world, experiments can run in an automated ML pipeline (see Figure 2-9), which comprises different steps (data prep, train, test, and so on). Each stage of the pipeline accepts parameters, inputs data, and generates results such as output values, metrics, and data to be used in subsequent pipeline steps. In addition, the tracking should be extended to operational data (which code was used, packages, allocated and used resources, systems, and so on).
+
+<img width="691" alt="Screenshot 2023-11-03 at 9 16 35 PM" src="https://github.com/andysingal/python-projects/assets/20493493/1a798170-dce0-4d0d-a948-f952b171b081">
+
+A good tracking system also records the code version, used packages, runtime environment and parameters, resources, code profiling, and so on
+
+<img width="629" alt="Screenshot 2023-11-03 at 9 18 27 PM" src="https://github.com/andysingal/python-projects/assets/20493493/cbac2a09-d88e-4e98-8bf1-25f1242e6552">
+
+Some MLOps frameworks provide auto-logging for ML/DL workloads where you can import a library that automatically records all the ML framework-specific metrics.
+
+## Distributed Training and Hyperparameter Optimization 
+To get to the best model results, try out various algorithms or parameter combinations and choose the best one based on a target metric like best accuracy. This work can be automated using multiple hyperparameter optimization and AutoML frameworks, which try out the different combinations, record all the metrics for each run and mark the best.
 
 
 
